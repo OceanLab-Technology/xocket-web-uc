@@ -1,0 +1,19 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "xocket-website-under-contruction",
+  "compatibility_date": "2026-05-03",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": {
+    "enabled": true
+  },
+  // Static-only Worker: no `main` script, just serve files from ./out.
+  // `npm run build` produces ./out via Next.js `output: "export"`.
+  // Presence of this file prevents Cloudflare's auto-detector from
+  // running @opennextjs/cloudflare migrate (which assumes SSR and
+  // looks for .next/standalone/.next/server/pages-manifest.json).
+  "assets": {
+    "directory": "./out",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash"
+  }
+}
